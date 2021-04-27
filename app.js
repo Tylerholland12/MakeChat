@@ -10,11 +10,12 @@ const io = require('socket.io')(server);
 let onlineUsers = {};
 //Save the channels in this object.
 let channels = {"General" : []}
+let onlineChannels = {};
+
 io.on("connection", (socket) => {
   // This file will be read on new socket connections
   // Make sure to send the channels to our chat file
-  require('./sockets/chat.js')(io, socket, onlineUsers, channels);
-  console.log("🔌 New user connected! 🔌");
+  require('./sockets/chat.js')(io, socket, onlineUsers, channels, onlineChannels);
 })
 
 //Express View Engine for Handlebars
